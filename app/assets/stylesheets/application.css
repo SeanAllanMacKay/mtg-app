@@ -59,7 +59,7 @@ button.secondary:hover{
     color: #009688;
 }
 
- #navigation{
+#navigation{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -67,22 +67,22 @@ button.secondary:hover{
     background-color: #009688;
     padding: 0px 30px;
     justify-content: space-between;
- }
+}
 
- #title{
-     min-width: 200px;
+#title{
+    min-width: 200px;
     cursor: pointer;
     font-family: 'Raleway', sans-serif;
- }
+}
 
- #navigation-menu{
+#navigation-menu{
     width: 200px;
     display: flex;
     justify-content: space-between;
     flex-shrink: 1
- }
+}
 
- .navigation-button{
+.navigation-button{
     color: white;
     background-color: transparent;
     height: 50px;
@@ -93,16 +93,23 @@ button.secondary:hover{
     font-size: 1.15em;
     border-bottom: 3px solid transparent;
     flex: 1;
- }
+}
 
- .navigation-button:focus,
- .navigation-button:hover{
+.navigation-button:focus,
+.navigation-button:hover{
     opacity: 1;
     border-bottom: 3px solid white;
- }
+}
 
- #content-container{
-     height: calc(100vh - 50px);
-     width: 100vw;
-     overflow: auto;
- }
+#content-container{
+    height: calc(100vh - 50px);
+    width: 100vw;
+    overflow: auto;
+}
+
+.header{
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.65em;
+    margin: 0 0 15px 0;
+    border-bottom: 1px solid grey
+}
