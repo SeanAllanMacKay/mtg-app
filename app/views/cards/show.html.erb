@@ -1,0 +1,46 @@
+<div
+    id="card-page-wrapper"
+>
+    <img class="card-image full" src="<%= @card[:card].image %>"/>
+
+    <div class="card-info-wrapper full">
+        <div class="card-header-wrapper full">
+            <h3 class="card-header full"><%= @card[:card].name %></h3>
+            <div class="mana-cost-wrapper">
+                <% if @card[:mana_cost] != nil %>
+                    <% @card[:mana_cost].each do |icon|%>
+                        <img class="card-icon full" src="<%= Icon.find_by(symbol: icon[0]).image %>" />
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+
+        <% if @card[:card] != nil %>
+            <% @card[:card].text.split("\n").each do |paragraph| %>
+                <div class="card-description-wrapper">
+                    <% paragraph.split(/({.*?})/).each do |thing| %>
+                        <% if(thing.match(/({.*?})/)) %>
+                            <img class="card-icon medium" src="<%= Icon.find_by(symbol: thing).image %>" />
+                        <% else %>
+                            <span class="card-description-text full">
+                                <%= thing %>
+                            </span>
+                        <% end %>
+                    <% end %>
+                    <br />
+                    <br />
+                </div>
+            <% end %>
+        <% end %>
+
+        <div class="number-wrapper">
+            <% if @card[:card].power != nil %>
+                <%= @card[:card].power %>/<%= @card[:card].toughness %>
+            <% end %>
+
+            <% if @card[:card].loyalty != nil %>
+                <%= @card[:card].loyalty %>
+            <% end %>
+        </div>
+    </div>
+</div>

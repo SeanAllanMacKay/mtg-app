@@ -11,4 +11,13 @@ class CardsController < ApplicationController
 
         @cards = cards
     end
+
+    def show
+        card = Card.find_by(name: params[:name])
+        image = card['mana_cost'].scan(/({.*?})/)
+        @card = {
+            card: card,
+            mana_cost: image
+        }
+    end
 end
