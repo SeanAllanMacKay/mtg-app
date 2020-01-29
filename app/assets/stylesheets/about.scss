@@ -1,0 +1,19 @@
+// Place all the styles related to the about controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+#about-page{
+    height: calc(100% - 60px);
+    width: calc(100% - 60px);
+    background-color: whitesmoke;
+    padding: 30px;
+}
+
+.content-wrapper{
+    margin: 0 0 50px 0;
+}
+
+.about-description{
+    font-size: 1.25em;
+    font-family: 'Roboto', sans-serif;
+}
