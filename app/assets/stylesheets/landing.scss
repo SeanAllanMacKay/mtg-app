@@ -1,3 +1,54 @@
 // Place all the styles related to the landing controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#landing-page{
+    height: calc(100% - 60px);
+    width: calc(100% - 60px);
+    background-color: whitesmoke;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.medium-text{
+    font-size: 2.5em;
+    font-family: 'Raleway', sans-serif;
+}
+
+.large-text{
+    font-size: 3em;
+    font-family: 'Merriweather', serif;
+}
+
+#landing-search-box{
+    min-width: 55%;
+    height: 45px;
+    margin: 40px 0 0 0;
+    border-radius: 10px;
+    border: none;
+    padding: 0px 15px;
+    font-size: 1.25em;
+    outline: 0;
+    transition: all 0.25s;
+    border: 2px solid grey;
+}
+
+#landing-search-box:focus,
+#landing-search-box:hover{
+    border: 2px solid #009688;
+}
+
+#landing-button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+    margin: 20px 0 0 0;
+}
+
+#landing-button-spacing{
+    flex: .2;
+}

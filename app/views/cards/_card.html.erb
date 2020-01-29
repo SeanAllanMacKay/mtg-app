@@ -1,0 +1,24 @@
+<div class="card-wrapper">
+    <img class="card-image" src="<%= card.image %>"/>
+
+    <div class="card-info-wrapper">
+        <div class="card-header-wrapper">
+            <h3 class="card-header"><%= card.name %></h3>
+            <% if card.mana_cost != nil %>
+                <h4><%= card.mana_cost %></h4>
+            <% end %>
+        </div>
+
+        <p class="card-description"><%= card.text %></p>
+
+        <div class="number-wrapper">
+            <% if card.power != nil %>
+                <%= card.power %>/<%= card.toughness %>
+            <% end %>
+
+            <% if card.loyalty != nil %>
+                <%= card.loyalty %>
+            <% end %>
+        </div>
+    </div>
+</div>

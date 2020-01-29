@@ -1,0 +1,32 @@
+<div id="cards-page">
+    <% @cards.each do |card| %>
+        <div class="card-wrapper">
+            <img class="card-image" src="<%= card[:card].image %>"/>
+
+            <div class="card-info-wrapper">
+                <div class="card-header-wrapper">
+                    <h3 class="card-header"><%= card[:card].name %></h3>
+                    <div class="mana-cost-wrapper">
+                        <% if card[:mana_cost] != nil %>
+                            <% card[:mana_cost].each do |icon|%>
+                                <img class="card-icon" src="<%= Icon.find_by(symbol: icon[0]).image %>" />
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+
+                <p class="card-description"><%= card[:card].text %></p>
+
+                <div class="number-wrapper">
+                    <% if card[:card].power != nil %>
+                        <%= card[:card].power %>/<%= card[:card].toughness %>
+                    <% end %>
+
+                    <% if card[:card].loyalty != nil %>
+                        <%= card[:card].loyalty %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>

@@ -1,3 +1,87 @@
 // Place all the styles related to the Cards controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+body,
+h1,
+h2,
+h3,
+h4,
+p{
+    margin: 0;
+}
+
+#cards-page{
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    padding: 30px;
+    transition: 2s;
+}
+
+.card-wrapper{
+    display: flex;
+    flex-direction: row;
+    box-shadow: -1px 7px 14px 8px rgba(191,191,191,0.6);
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    top: 0;
+    opacity: 0.8;
+    cursor: pointer;
+
+    &:hover{
+        top: -10px;
+        opacity: 1;
+        transition: top 0.25s, opacity 0.25s;
+    }
+}
+
+.card-image{
+    height: 250px;
+    border-radius: 10px;
+    margin: 0 20px 0 0;
+}
+
+.card-header-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 0 10px 0
+}
+
+.mana-cost-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+.card-icon{
+    width: 17px;
+}
+
+.card-info-wrapper{
+
+}
+
+.card-header{
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5em;
+    border-bottom: 2px solid lightgrey;
+    padding: 0 0 3px 0;
+    margin: 0 0 5px 0;
+}
+
+.card-description{
+    font-family: 'Roboto', sans-serif;
+    margin: 0 0 20px 0;
+}
+
+.number-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1em;
+    color: gray;
+}

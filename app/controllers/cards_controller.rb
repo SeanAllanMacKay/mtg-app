@@ -1,11 +1,14 @@
 class CardsController < ApplicationController
-    def new
-    end
-
-    def create
-    end
-
     def index
-        render({json: Card.all.length})
+        cards = []
+
+        Card.where(id: 1..30).each do |card|
+            cards.push({
+                card: card,
+                mana_cost: card['mana_cost'].scan(/({.*?})/)
+            })
+        end
+
+        @cards = cards
     end
 end

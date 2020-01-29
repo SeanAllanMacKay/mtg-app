@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_27_200811) do
+ActiveRecord::Schema.define(version: 2020_01_28_231949) do
 
   create_table "card_colors", force: :cascade do |t|
     t.integer "card_id"
@@ -66,6 +66,14 @@ ActiveRecord::Schema.define(version: 2020_01_27_200811) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_formats_on_name", unique: true
+  end
+
+  create_table "icons", force: :cascade do |t|
+    t.string "symbol"
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["symbol"], name: "index_icons_on_symbol", unique: true
   end
 
   create_table "types", force: :cascade do |t|

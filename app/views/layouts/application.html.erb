@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MtgApp</title>
+    <title>MTG-DB</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link href="https://fonts.googleapis.com/css?family=Oswald:600|Roboto|Raleway:600|Merriweather:700&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div id="navigation">
+      <h1
+        id="title"
+        onClick="window.location.href = '/'"
+      >
+        MTG-DB
+      </h1>
+
+      <div>
+        <button
+          class="navigation-button"
+          onClick="window.location.href = '/'"
+        >
+          About
+        </button>
+      </div>
+    </div>
+
+    <div id="content-container">
+      <%= yield %>
+    </div>
   </body>
 </html>

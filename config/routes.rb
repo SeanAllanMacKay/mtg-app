@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'landing/index'
 
-  resources :cards, :formats
+  resources :cards
 
   root 'landing#index'
 end

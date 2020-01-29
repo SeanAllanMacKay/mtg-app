@@ -1,11 +1,5 @@
 class FormatsController < ApplicationController
-    def new
-    end
-
-    def create
-    end
-
     def index
-        render(json: Card.all.length + Type.all.length + Format.all.length + Color.all.length + CardFormat.all.length + CardType.all.length +  CardColor.all.length)
+        @test = (Card.all.length + Type.all.length + Format.all.length + Color.all.length + CardFormat.all.length + CardType.all.length + CardColor.all.length)
     end
 end
