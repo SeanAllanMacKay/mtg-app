@@ -1,6 +1,9 @@
 <div id="cards-page">
     <% @cards.each do |card| %>
-        <div class="card-wrapper">
+        <div
+            class="card-wrapper"
+            onClick="window.location.href = '/card/<%= card[:card].name  %>'"
+        >
             <img class="card-image" src="<%= card[:card].image %>"/>
 
             <div class="card-info-wrapper">
@@ -15,7 +18,25 @@
                     </div>
                 </div>
 
-                <p class="card-description"><%= card[:card].text %></p>
+
+                <% if card[:card] != nil %>
+                    <% card[:card].text.split("\n").each do |paragraph| %>
+                        <div class="card-description-wrapper">
+                            <% paragraph.split(/({.*?})/).each do |thing| %>
+                                <% if(thing.match(/({.*?})/)) %>
+                                    <img class="card-icon small" src="<%= Icon.find_by(symbol: thing).image %>" />
+                                <% else %>
+                                    <span class="card-description-text">
+                                        <%= thing %>
+                                    </span>
+                                <% end %>
+                            <% end %>
+                            <br />
+                            <br />
+                        </div>
+                    <% end %>
+                <% end %>
+
 
                 <div class="number-wrapper">
                     <% if card[:card].power != nil %>

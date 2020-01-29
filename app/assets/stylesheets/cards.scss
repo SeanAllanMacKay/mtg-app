@@ -41,13 +41,23 @@ p{
     height: 250px;
     border-radius: 10px;
     margin: 0 20px 0 0;
+
+    &.full{
+        min-height: 500px;
+    }
 }
 
 .card-header-wrapper{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 0 0 10px 0
+    margin: 0 0 10px 0;
+
+    &.full{
+        display: flex;
+        flex-direction: row;
+        border-bottom: 2px solid lightgrey;
+    }
 }
 
 .mana-cost-wrapper{
@@ -57,10 +67,25 @@ p{
 
 .card-icon{
     width: 17px;
+
+    &.full{
+        width: 30px
+    }
+
+    &.medium{
+        width: 25px
+    }
+
+    &.small{
+        display: inline-block;
+        top: 10px
+    }
 }
 
 .card-info-wrapper{
-
+    &.full{
+        flex: 1
+    }
 }
 
 .card-header{
@@ -69,11 +94,24 @@ p{
     border-bottom: 2px solid lightgrey;
     padding: 0 0 3px 0;
     margin: 0 0 5px 0;
+
+    &.full{
+        font-size: 2.5em;
+        border-bottom: none;
+    }
 }
 
-.card-description{
+.card-description-wrapper{
+
+}
+
+.card-description-text{
     font-family: 'Roboto', sans-serif;
-    margin: 0 0 20px 0;
+    word-break: break-word;
+
+    &.full{
+        font-size: 1.5em;
+    }
 }
 
 .number-wrapper{
@@ -85,4 +123,13 @@ p{
     font-family: 'Roboto', sans-serif;
     font-size: 1.1em;
     color: gray;
+}
+
+#card-page-wrapper{
+    height: calc(100% - 60px);
+    width: calc(100% - 60px);
+    background-color: whitesmoke;
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
 }
