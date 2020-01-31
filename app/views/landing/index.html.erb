@@ -1,13 +1,29 @@
+<script>
+    const search = () => {
+        const search_string = document.getElementById('landing-search-box').value
+        window.location.href = `/cards?search_string=${search_string}`
+    }
+</script>
+
 <div id="landing-page">
     <h2 class="large-text">Magic: The Gathering</h2>
     <h2 class="medium-text">Card Database</h2>
 
-    <input id="landing-search-box"/>
-
+    <input id="landing-search-box" />
     <div id="landing-button-container">
-        <button class="secondary">Random</button>
+        <button
+            class="secondary"
+            onClick="window.location.href = '/card/<%= @card.name %>'"
+        >
+            Random
+        </button>
         <div id="landing-button-spacing"></div>
-        <button class="primary">Search</button>
+        <button
+            class="primary"
+            onClick="search()"
+        >
+            Search
+        </button>
     </div>
 </div>
 
