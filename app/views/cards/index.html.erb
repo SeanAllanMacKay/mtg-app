@@ -18,8 +18,7 @@
                     </div>
                 </div>
 
-
-                <% if card[:card] != nil %>
+                <% if card[:card].text != nil %>
                     <% card[:card].text.split("\n").each do |paragraph| %>
                         <div class="card-description-wrapper">
                             <% paragraph.split(/({.*?})/).each do |thing| %>
@@ -37,14 +36,13 @@
                     <% end %>
                 <% end %>
 
-
                 <div class="number-wrapper">
                     <% if card[:card].power != nil %>
                         <%= card[:card].power %>/<%= card[:card].toughness %>
                     <% end %>
 
                     <% if card[:card].loyalty != nil %>
-                        <%= card[:card].loyalty %>
+                        Starting Loyalty: <%= card[:card].loyalty %>
                     <% end %>
                 </div>
             </div>

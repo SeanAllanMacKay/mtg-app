@@ -1,5 +1,5 @@
 class LandingController < ApplicationController
   def index
-    @test = 1
+    @card = Card.find(rand(1..Card.all.length))
   end
 end

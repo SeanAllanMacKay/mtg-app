@@ -22,6 +22,7 @@ p{
     margin: 0;
 }
 
+input.primary,
 button.primary{
     flex: 1;
     border-radius: 5px;
@@ -35,11 +36,14 @@ button.primary{
     outline: 0;
 }
 
+input.primary:focus,
+input.primary:hover,
 button.primary:focus,
 button.primary:hover{
     opacity: 0.8
 }
 
+input.secondary,
 button.secondary{
     flex: 1;
     border-radius: 5px;
@@ -53,6 +57,8 @@ button.secondary{
     outline: 0
 }
 
+input.secondary:focus,
+input.secondary:hover,
 button.secondary:focus,
 button.secondary:hover{
     border: 2px solid #009688;
