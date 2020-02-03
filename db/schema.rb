@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_28_231949) do
+ActiveRecord::Schema.define(version: 2020_02_03_183638) do
 
   create_table "card_colors", force: :cascade do |t|
     t.integer "card_id"
@@ -49,6 +49,11 @@ ActiveRecord::Schema.define(version: 2020_01_28_231949) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "rarity"
+    t.string "set"
+    t.integer "multiverse_id"
+    t.string "set_name"
+    t.string "rulings"
     t.index ["name"], name: "index_cards_on_name", unique: true
   end
 
