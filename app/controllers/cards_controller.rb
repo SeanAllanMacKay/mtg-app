@@ -3,6 +3,7 @@ class CardsController < ApplicationController
     def index
         cards = []
         @search_string = params[:search_string]
+        @page = params[:page] ? params[:page] : 1
 
         @expansions = Expansion.where(expansion_type: 'expansion')
         @types = Type.where(subtype: false)
@@ -14,7 +15,9 @@ class CardsController < ApplicationController
                 where("card_name LIKE '%#{@search_string}%' OR text LIKE '%#{@search_string}%'").
                 where("code != 'cmb1'").
                 where("type_name != 'Token' AND type_name != 'Card' AND type_name != 'Vanguard'").
-                distinct.each do |thing|
+                distinct.
+                page(@page).
+                each do |thing|
                     cards.push({
                         card: thing,
                         mana_cost: thing['mana_cost'] ? thing['mana_cost'].scan(/({.*?})/) : []
