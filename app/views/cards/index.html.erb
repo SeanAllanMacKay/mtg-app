@@ -14,6 +14,26 @@
             carat.classList.remove('open')
         }
     }
+
+    const search = () => {
+        const search_string = document.getElementById('cards-search-box').value
+        window.location.href = `/cards?search_string=${search_string}`
+    }
+
+    const nextPage = () => {
+        window.location.href = `/cards${'<%= @search_string %>' ? '<%= @page %>' ? '?search_string=<%= @search_string %>&page=<%= @page.to_i + 1 %>' : '?search_string=<%= @search_string %>&page=2' : '<%= @page %>' ? '?page=<%= @page.to_i + 1 %>' : '?page=2'}`
+    }
+
+    const previousPage = () => {
+        if('<%= @page %>' && parseInt('<%= @page %>') > 2){
+            window.location.href = `/cards${'<%= @search_string %>' ? '?search_string=<%= @search_string %>&page=<%= @page.to_i - 1 %>' : '?page=<%= @page.to_i - 1 %>'}`
+        }
+
+        if('<%= @page %>' && parseInt('<%= @page %>') === 2){
+            window.location.href = `/cards${'<%= @search_string %>' ? '?search_string=<%= @search_string %>' : ''}`
+        }
+        //window.location.href = `/cards${'<%= @search_string %>' ? '<%= @page %>' ? '?search_string=<%= @search_string %>&page=<%= @page.to_i + 1 %>' : '?search_string=<%= @search_string %>&page=2' : '<%= @page %>' ? '?page=<%= @page.to_i + 1 %>' : '?page=2'}`
+    }
 </script>
 
 <div
@@ -34,12 +54,16 @@
                 </svg>
             </div>
             <input
+                id="cards-search-box"
                 class="search-field search-box"
                 value="<%= @search_string %>"
             >
             <button
                 id="search-button"
-            >Search</button>
+                onclick="search()"
+            >
+                Search
+            </button>
         </div>
     </div>
 
@@ -163,8 +187,10 @@
             </div>
         </div>
     <% end %>
+</div>
 
-    <div>
-        <>
-    </div>
+<div id="pagination-wrapper">
+    <button onclick="previousPage()">prev</button>
+    <p><%= @page %></p>
+    <button onclick="nextPage()">next</button>
 </div>
