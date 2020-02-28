@@ -1,6 +1,6 @@
 class Card < ActiveRecord::Base
-    validates :name, presence: true
-    validates :name, uniqueness: true
+    validates :cad_name, presence: true
+    validates :card_name, uniqueness: true
 
     has_many :card_formats
     has_many :formats, through: :card_formats
@@ -11,4 +11,10 @@ class Card < ActiveRecord::Base
 
     has_many :card_Types
     has_many :types, through: :card_Types
+
+    has_many :card_expansions
+    has_many :expansion, through: :card_expansions
+
+    has_many :card_rarities
+    has_many :rarity, through: :card_rarities
 end

@@ -2,15 +2,24 @@ require 'pp'
 class CardsController < ApplicationController
     def index
         cards = []
-        search_string = params[:search_string]
+        @search_string = params[:search_string]
 
-        if(search_string != nil)
-            Card.where("name LIKE '%#{search_string}%' OR text LIKE '%#{search_string}%'").each do |card|
-                cards.push({
-                    card: card,
-                    mana_cost: card['mana_cost'] != nil ? card['mana_cost'].scan(/({.*?})/) : nil
-                })
-            end
+        @expansions = Expansion.where(expansion_type: 'expansion')
+        @types = Type.where(subtype: false)
+        @subtypes = Type.where(subtype: true)
+
+        if(@search_string != nil)
+            Card.
+                joins(:types, :expansion).
+                where("card_name LIKE '%#{@search_string}%' OR text LIKE '%#{@search_string}%'").
+                where("code != 'cmb1'").
+                where("type_name != 'Token' AND type_name != 'Card' AND type_name != 'Vanguard'").
+                distinct.each do |thing|
+                    cards.push({
+                        card: thing,
+                        mana_cost: thing['mana_cost'] ? thing['mana_cost'].scan(/({.*?})/) : []
+                    })
+                end
         else
             Card.where(id: 1..30).each do |card|
                 cards.push({
@@ -24,13 +33,11 @@ class CardsController < ApplicationController
     end
 
     def show
-        card = Card.find_by(name: params[:name])
+        card = Card.joins(:card_formats).find_by(card_name: params[:card_name])
         image = card['mana_cost'].scan(/({.*?})/)
         @card = {
             card: card,
-            mana_cost: image
+            mana_cost: image,
         }
-
-        pp card
     end
 end

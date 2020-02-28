@@ -1,6 +1,6 @@
 class Type < ApplicationRecord
-    validates :name, presence: true
-    validates :name, uniqueness: true
+    validates :type_name, presence: true
+    validates :type_name, uniqueness: true
 
     has_many :card_types
     has_many :cards, through: :card_types

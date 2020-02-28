@@ -21,16 +21,22 @@
 
       <div id="navigation-menu">
         <button
-          class="navigation-button"
+          class="navigation-button <%= @params['controller'] == 'about' ? 'selected' : nil %>"
           onClick="window.location.href = '/about'"
         >
           About
         </button>
         <button
-          class="navigation-button"
+          class="navigation-button <%= @params['controller'] == 'cards' && @params['action'] == 'index' ? 'selected' : nil %>"
           onClick="window.location.href = '/cards'"
         >
           Cards
+        </button>
+        <button
+          class="navigation-button <%= @params['controller'] == 'expansions' && @params['action'] == 'index' ? 'selected' : nil %>"
+          onClick="window.location.href = '/expansions'"
+        >
+          Expansions
         </button>
       </div>
     </div>

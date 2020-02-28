@@ -1,0 +1,36 @@
+<script>
+    const redirect = (expansionName) => {
+        console.log(expansionName)
+        window.location.href = `/expansion/${expansionName}`
+    }
+</script>
+
+<div id="expansions-page">
+    <% @collections.each do |collection| %>
+        <div>
+            <h3 class="section-header">
+                <%= collection[:name] %>
+            </h3>
+
+            <div class="table">
+                <div class="table-row header">
+                    <div class="table-column icon"></div>
+                    <h4 class="table-column name">Name</h4>
+                    <h4 class="table-column code">Code</h4>
+                    <h4 class="table-column count">Card Count</h4>
+                    <h4 class="table-column released">Realeased</h4>
+                </div>
+
+                <% collection[:values].each_with_index do |value, index| %>
+                    <div onclick="redirect('<%= value.expansion_name %>')" class="table-row <%= index%2 == 0 ? 'second' : nil %>">
+                        <div class="table-column icon"><img class="icon" src="<%= value.icon %>" /></div>
+                        <p class="table-column name"><%= value.expansion_name %></p>
+                        <p class="table-column code"><%= value.code %></p>
+                        <p class="table-column count"><%= value.card_count %></p>
+                        <p class="table-column released"><%= value.released_at %></p>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+</div>

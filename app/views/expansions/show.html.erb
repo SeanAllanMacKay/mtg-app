@@ -1,0 +1,34 @@
+<script>
+    const redirect = (cardName) => {
+        window.location.href = `/card/${cardName}`
+    }
+</script>
+
+<div
+    id="expansion-page-wrapper"
+>
+    <div id="header-wrapper">
+        <img id="expansion-icon" src="<%= @expansion.icon %>"/>
+        <h3 id="expansion-title"><%= @expansion.expansion_name %></h3>
+    </div>
+
+    <div class="table">
+        <div class="table-row header">
+            <h4 class="table-column name">Name</h4>
+            <h4 class="table-column mana-cost">Mana Cost</h4>
+        </div>
+
+        <% @expansion.cards.each_with_index do |value, index| %>
+            <div onclick="redirect('<%= value.card_name %>')" class="table-row <%= index%2 == 0 ? 'second' : nil %>">
+                <p class="table-column name"><%= value.card_name %></p>
+                <div class="table-column mana-cost">
+                    <% if (value.mana_cost.scan(/({.*?})/) != nil) %>
+                        <% value.mana_cost.scan(/({.*?})/).each do |icon|%>
+                            <img class="expansion-card-icon" src="<%= Icon.find_by(symbol: icon[0]).icon_image %>" />
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
