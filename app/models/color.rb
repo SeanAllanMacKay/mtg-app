@@ -1,6 +1,6 @@
 class Color < ApplicationRecord
-    validates :name, presence: true
-    validates :name, uniqueness: true
+    validates :color_name, presence: true
+    validates :color_name, uniqueness: true
 
     validates :initial, presence: true
     validates :initial, uniqueness: true

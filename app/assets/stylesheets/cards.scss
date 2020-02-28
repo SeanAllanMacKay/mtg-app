@@ -40,7 +40,7 @@ p{
 .card-image{
     height: 250px;
     border-radius: 10px;
-    margin: 0 20px 0 0;
+    margin: 0 30px 0 0;
 
     &.full{
         min-height: 500px;
@@ -72,10 +72,6 @@ p{
         width: 30px
     }
 
-    &.medium{
-        width: 25px
-    }
-
     &.small{
         display: inline-block;
         top: 10px
@@ -101,8 +97,24 @@ p{
     }
 }
 
-.card-description-wrapper{
+.description-wrapper{
+}
 
+.card-text-wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+.description-header{
+    flex: 1;
+    max-width: 1px;
+}
+
+.card-text-wrapper-inner{
+    flex: 5;
+    margin: 0 0 30px 0;
+    padding: 10px 0 0 0;
+    position: relative;
 }
 
 .card-description-text{
@@ -110,7 +122,15 @@ p{
     word-break: break-word;
 
     &.full{
-        font-size: 1.5em;
+        font-size: 1.25em;
+    }
+
+    &.legal{
+        color: rgba(0, 150, 136, 1);
+    }
+
+    &.illegal{
+        color: darkred;
     }
 }
 
@@ -126,10 +146,156 @@ p{
 }
 
 #card-page-wrapper{
-    height: calc(100% - 60px);
+    min-height: calc(100% - 60px);
     width: calc(100% - 60px);
     background-color: whitesmoke;
     padding: 30px;
     display: flex;
     flex-direction: row;
+}
+
+.rulings-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.ruling-container{
+    position: relative;
+    margin: 0 0 20px 0;
+}
+
+.section-header{
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5em;
+    margin: 0 20px 0 0;
+    min-width: 150px;
+}
+
+.ruling-text{
+    flex: 1;
+    margin: 0 20px 0 0;
+    font-family: 'Roboto', sans-serif;
+    word-break: break-word;
+}
+
+.ruling-date{
+    font-size: 1.25em;
+    margin: 10px 0 0 0;
+    color: grey;
+}
+
+.expansion-wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 0 10px 0;
+    :hover{
+        color: rgba(0, 150, 136, 1);
+        cursor: pointer;
+    }
+}
+
+.separator{
+    margin: 0 20px;
+    font-size: 1.25em;
+}
+
+#search-container{
+    padding: 15px 30px;
+    background-color: whitesmoke;
+    height: 60px;
+    overflow: auto;
+    position: relative;
+
+    transition: height 0.5s;
+
+    &.open{
+        height: 500px;
+    }
+}
+
+#search-box-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.search-field{
+    background-color: transparent;
+    border: none;
+    outline: 0;
+
+    &.active{
+        border: 1px solid rgba(0, 150, 136, 1);
+    }
+
+    &.search-box{
+        font-size: 20px;
+        flex: 1;
+        color: rgba(0, 150, 136, 1);
+    }
+
+    &.input{
+
+    }
+}
+
+.input-container{
+    width: 60%;
+    border-radius: 5px;
+    display: flex;
+    overflow: hidden;
+    flex-direction: row;
+    background-color: rgba(0, 150, 136, 0.15);
+}
+
+#search-button{
+    border: none;
+    background-color: rgba(0, 150, 136, 1);
+    color:white;
+    font-size: 15px;
+    padding: 0 20px
+}
+
+#search-icon-container{
+    padding: 10px 10px 7px 10px
+}
+
+#card-legality-wrapper{
+    width: 100%;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    transition: 2s;
+}
+
+.card-legality-wrapper-individual{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#filter-parameters{
+    opacity: 0;
+
+    transition: opacity 0.5s;
+
+    &.open{
+        opacity: 1;
+    }
+}
+
+#carat{
+    position: absolute;
+    bottom: 0px;
+    right: calc(50% - 5px);
+    transform: rotate(180deg);
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5em;
+
+    &.open{
+        transform: rotate(0deg);
+    }
 }

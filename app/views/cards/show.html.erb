@@ -1,46 +1,153 @@
+<script>
+    const getRulings = async () => {
+        const test = '<%= @card[:card].rulings %>'
+        const res = await fetch(test)
+        const json = await res.json()
+
+        const rulings = json.data
+
+        if(rulings.length){
+            const rulingsContainer = document.createElement("div")
+            rulingsContainer.classList.add("card-text-wrapper")
+
+            const title = document.createElement("h2")
+            title.classList.add("section-header")
+            title.innerText = 'Rulings'
+
+            rulingsContainer.appendChild(title)
+
+            const wrapper = document.createElement("div")
+            wrapper.classList.add("card-text-wrapper-inner")
+
+            rulings.forEach((ruling) => {
+                const rulingContainer = document.createElement("div")
+                rulingContainer.classList.add("ruling-container")
+
+                const rulingTextContainer = document.createElement("div")
+                rulingTextContainer.classList.add("ruling-text")
+                rulingTextContainer.classList.add("card-description-text")
+                rulingTextContainer.classList.add("full")
+
+                const rulingDateContainer = document.createElement("div")
+                rulingDateContainer.classList.add("ruling-date")
+
+                rulingTextContainer.innerText = ruling.comment
+                rulingDateContainer.innerText = ruling.published_at
+
+                rulingContainer.appendChild(rulingTextContainer)
+                rulingContainer.appendChild(rulingDateContainer)
+
+                wrapper.appendChild(rulingContainer)
+            })
+
+            rulingsContainer.appendChild(wrapper)
+
+            document.getElementById("description-wrapper").appendChild(rulingsContainer)
+        }
+    }
+
+    const redirect = (expansionName) => {
+        window.location.href = `/expansion/${expansionName}`
+    }
+
+    document.onload = getRulings()
+</script>
+
 <div
     id="card-page-wrapper"
 >
-    <img class="card-image full" src="<%= @card[:card].image %>"/>
+    <img class="card-image full" src="<%= @card[:card].card_image %>"/>
 
-    <div class="card-info-wrapper full">
+    <div id="card-info-wrapper" class="card-info-wrapper full">
+
         <div class="card-header-wrapper full">
-            <h3 class="card-header full"><%= @card[:card].name %></h3>
+            <h3 class="card-header full"><%= @card[:card].card_name %></h3>
             <div class="mana-cost-wrapper">
                 <% if @card[:mana_cost] != nil %>
                     <% @card[:mana_cost].each do |icon|%>
-                        <img class="card-icon full" src="<%= Icon.find_by(symbol: icon[0]).image %>" />
+                        <img class="card-icon full" src="<%= Icon.find_by(symbol: icon[0]).icon_image %>" />
                     <% end %>
                 <% end %>
             </div>
         </div>
 
-        <% if @card[:card] != nil %>
-            <% @card[:card].text.split("\n").each do |paragraph| %>
-                <div class="card-description-wrapper">
-                    <% paragraph.split(/({.*?})/).each do |thing| %>
-                        <% if(thing.match(/({.*?})/)) %>
-                            <img class="card-icon medium" src="<%= Icon.find_by(symbol: thing).image %>" />
-                        <% else %>
-                            <span class="card-description-text full">
-                                <%= thing %>
-                            </span>
-                        <% end %>
-                    <% end %>
-                    <br />
-                    <br />
+        <% if @card[:card].text != nil || @card[:card].power != nil || @card[:card].loyalty != nil || @card[:card].toughness %>
+
+            <div id="description-wrapper" class="description-wrapper">
+                <% if @card[:card].text != nil %>
+                    <div class="card-text-wrapper">
+                        <h3 class="section-header">
+                            Card Text
+                        </h3>
+
+                        <div class="card-text-wrapper-inner">
+                            <% @card[:card].text.split("\n").each do |paragraph| %>
+                                <div class="card-description-wrapper">
+                                    <% paragraph.split(/({.*?})/).each do |thing| %>
+                                        <% if(thing.match(/({.*?})/)) %>
+                                            <img class="card-icon medium" src="<%= Icon.find_by(symbol: thing).icon_image %>" />
+                                        <% else %>
+                                            <span class="card-description-text full">
+                                                <%= thing %>
+                                            </span>
+                                        <% end %>
+                                    <% end %>
+                                    <br />
+                                    <br />
+                                </div>
+                            <% end %>
+
+                            <div class="number-wrapper">
+                                <% if @card[:card].power != nil %>
+                                    <%= @card[:card].power %>/<%= @card[:card].toughness %>
+                                <% end %>
+
+                                <% if @card[:card].loyalty != nil %>
+                                    <%= @card[:card].loyalty %>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+
+                <div class="card-text-wrapper">
+                    <h3 class="section-header">
+                        Legalities
+                    </h3>
+
+                    <div class="card-text-wrapper-inner">
+                        <div id="card-legality-wrapper">
+                            <% @card[:card].formats.each do |card_format| %>
+                            <div class="card-legality-wrapper-individual">
+                                <p class="card-description-text full <%= @card[:card].card_formats.find_by(format_id: card_format.id).legality ? 'legal' : 'illegal' %>">
+                                    <%= card_format.format_name %>
+                                </p>
+                            </div>
+                            <% end %>
+                        </div>
+                    </div>
                 </div>
-            <% end %>
+
+                <% if @card[:card].expansion.length > 0 %>
+                    <div class="card-text-wrapper">
+                        <h3 class="section-header">
+                            Expansions
+                        </h3>
+
+                        <div class="card-text-wrapper-inner">
+                            <% @card[:card].expansion.each do |expansion| %>
+                                <div class="expansion-wrapper" onclick="redirect('<%= expansion.expansion_name %>')">
+                                    <img class="card-icon full" src="<%= expansion.icon %>" />
+                                    <p class="separator" ></p>
+                                    <p class="card-description-text full">
+                                        <%= expansion.expansion_name %>
+                                    </p>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
         <% end %>
-
-        <div class="number-wrapper">
-            <% if @card[:card].power != nil %>
-                <%= @card[:card].power %>/<%= @card[:card].toughness %>
-            <% end %>
-
-            <% if @card[:card].loyalty != nil %>
-                <%= @card[:card].loyalty %>
-            <% end %>
-        </div>
     </div>
 </div>
